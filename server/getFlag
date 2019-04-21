@@ -1,0 +1,30 @@
+<?php
+$arr = [];
+for ($i=0; $i < 5; $i++) { 
+	$name = "awd-web:server".(intval($i)+1);
+
+	exec('docker ps | grep '.$name.' | awk -F " " \'{print $1}\'', $stdout, $error);
+
+	if (!empty($stdout)) {
+		exec('docker inspect '.$stdout[0].' | grep IPAddress | awk -F "\"" \'{print $4}\'', $result, $error);
+
+		// 生成10组flag
+		$time = time();
+
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+		$flags[] = "flag3{".md5(rand(99999, 999999).$result[1].time())."}";
+
+		$arr[$result[1]] = $flags;
+	}
+	
+}
+// echo json_encode($arr);
+file_put_contents("flags.json", json_encode($arr));

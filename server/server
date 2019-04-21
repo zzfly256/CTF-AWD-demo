@@ -1,0 +1,30 @@
+<?php
+
+// 记录开始时间
+file_put_contents('startAt', time());
+
+$http = new swoole_http_server("172.17.0.1", 80);
+
+$http->on('request', function ($request, $response) {
+    
+    $ip = explode(':', $request->server['remote_addr'])[0];
+
+    $flags = (array)json_decode(file_get_contents("flags.json"));
+
+    $startAt = file_get_contents('startAt');
+    $time = time() - $startAt;
+    $round = intval($time/600);
+
+    $response->header("Content-Type", "text/json; charset=utf-8");
+    if (array_key_exists($ip, $flags)) {
+        echo "[OK] ".date(" H:i:s ")."Round $round Get flag From $ip\n";
+        $response->end($flags[$ip][$round]);
+    } else {
+         echo "[Fail] ".date(" H:i:s ")."Round $round Get flag From $ip\n";
+        $response->end("");
+    }
+    
+});
+
+$http->start();
+
