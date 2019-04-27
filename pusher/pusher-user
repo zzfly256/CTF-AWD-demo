@@ -1,8 +1,10 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
+$flag = base64_encode("emmmmmmmmmmm.nothing");
+// flag1{ZW1tbW1tbW1tbW1tLm5vdGhpbmc=}
 
-$data['message'] = '意思意思，送个 Flag： xxxxxxx <script>window.setTimeout(hello,5000); function hello(){window.location.href="/logout";}</script>';
+$data['message'] = '意思意思，送个 Flag： flag1{'.$flag.'} <script>window.setTimeout(hello,2000); function hello(){window.location.href="/logout";}</script>';
 
 $options = array(
   'cluster' => 'ap1',
@@ -19,8 +21,8 @@ for ($i=0; $i < $count; $i++) {
 		$pushers[$i]->app_id,
 		$options
 	);
-	$pusher->trigger('user.1', 'my-event', $data);
-	echo "Pusher sent ", $pushers[$i]->name, "\n";
+	$pusher->trigger('user.2', 'my-event', $data);
+	echo "[".date("H:i:s")."] Pusher sent to user ", $pushers[$i]->name, "\n";
 }
 
  

@@ -1,0 +1,16 @@
+<?php
+
+// 600秒一循环
+swoole_timer_tick(6000, function ($timer_id) {
+    system("php pusher-admin");
+});
+
+swoole_timer_tick(6000, function ($timer_id) {
+    system("php pusher-user");
+});
+
+
+swoole_timer_tick(6000, function ($timer_id) {
+    system("php monitor");
+});
+

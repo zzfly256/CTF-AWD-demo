@@ -1,0 +1,23 @@
+<?php 
+error_reporting(0);
+date_default_timezone_set('Asia/Shanghai'); 
+
+$ports = [
+	'server1' => '32780',
+	'server2' => '32782',
+	'server3' => '32784',
+	'server4' => '32786',
+	'server5' => '32788',
+	'server6' => '32790'
+]; 
+
+// 访问 pusher.js 文件，看看 web 访问是否可用，这个文件是否被删除
+
+foreach ($ports as $server => $port) {
+	$result = file_get_contents("http://do.x64.men:".$port."/pusher-sdk/pusher.js");
+	if(strlen($result)< 90) {
+		echo date("[H:i:s] "),ucfirst($server)," is down !!!!!!!!! \n";
+	} else {
+		echo date("[H:i:s] "),ucfirst($server)," is running \n";
+	}
+}

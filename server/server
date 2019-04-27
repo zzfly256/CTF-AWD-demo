@@ -1,20 +1,31 @@
 <?php
 
+error_reporting(0);
+
 // 记录开始时间
+date_default_timezone_set('Asia/Shanghai'); 
 file_put_contents('startAt', time());
 
+// 开启 HTTP 服务器，仅支持内网访问
 $http = new swoole_http_server("172.17.0.1", 80);
+// $http = new swoole_http_server("127.0.0.1", 8000);
 
+
+// 接受 HTTP 请求
 $http->on('request', function ($request, $response) {
     
+    // 获取访问者 ip
     $ip = explode(':', $request->server['remote_addr'])[0];
 
+    // 加载 flags
     $flags = (array)json_decode(file_get_contents("flags.json"));
 
+    // 判断第几轮
     $startAt = file_get_contents('startAt');
     $time = time() - $startAt;
     $round = intval($time/600);
 
+    // 返回第几轮
     $response->header("Content-Type", "text/json; charset=utf-8");
     if (array_key_exists($ip, $flags)) {
         echo "[OK] ".date(" H:i:s ")."Round $round Get flag From $ip\n";
@@ -27,4 +38,3 @@ $http->on('request', function ($request, $response) {
 });
 
 $http->start();
-

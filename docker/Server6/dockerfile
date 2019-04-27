@@ -1,0 +1,5 @@
+FROM awd-web:templete
+RUN rm /var/www/html/public/pusher-sdk/pusher.js
+COPY ./pusher.js /var/www/html/public/pusher-sdk/
+CMD ["ash", "/bootstrap.sh"]
+

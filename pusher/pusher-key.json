@@ -1,14 +1,45 @@
 [
-	{
-		"name": "awd",
-		"app_id": "765903",
- 		"key": "af3e24d4d091be9bb173",
- 		"secret": "ebcb4fb07b8905871576"
-	},
+
 	{
 		"name": "awd1",
 		"app_id": "766326",
  		"key": "0bf9226583de0d6bd642",
- 		"secret": "3f31f07605c991cede2c"
+ 		"secret": "3f31f07605c991cede2c",
+ 		"flag2": "UGFzc3dkIHJvdDEzOnAzOHBvcDIxMnI="
+	},
+	{
+		"name": "awd2",
+		"app_id": "769693",
+		"key": "a6fa7ad2e394878c1cda",
+		"secret": "dd0a84b22b80c4d3c08b",
+		"flag2": "UGFzc3dkIHJvdDEzOnExMTMzcTMxMTg="
+	},
+	{
+		"name": "awd3",
+		"app_id": "769705",
+		"key": "5c05917714d4d62059ac",
+		"secret": "398ef280cef7a441aa9b",
+		"flag2": "UGFzc3dkIHJvdDEzOnA2MzhzOHI5cHI="
+	},
+	{
+		"name": "awd4",
+		"app_id": "769709",
+		"key": "fb88734a9cddad3c92b9",
+		"secret": "043f2af9c91e2ca12a30",
+		"flag2": "UGFzc3dkIHJvdDEzOnByc29wMnM4OHA="
+	},
+	{
+		"name": "awd5",
+		"app_id": "769720",
+		"key": "f410a8281e1ccd30a48f",
+		"secret": "e14263185bd4c45d96ef",
+		"flag2": "UGFzc3dkIHJvdDEzOnA2bnNwM3AwNXA="
+	},
+	{
+		"name": "awd6",
+		"app_id": "769723",
+		"key": "bb3ba14f06b57f96b03c",
+		"secret": "78f790e32ff332e1db36",
+		"flag2": "UGFzc3dkIHJvdDEzOjQ5cHA4b29zcnM="
 	}
 ]

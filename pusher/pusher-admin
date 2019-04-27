@@ -1,0 +1,37 @@
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+// $flags = [
+// 	"UGFzc3dkIHJvdDEzOnAzOHBvcDIxMnI=",
+// 	"UGFzc3dkIHJvdDEzOnExMTMzcTMxMTg=",
+// 	"UGFzc3dkIHJvdDEzOnA2MzhzOHI5cHI=",
+// 	"UGFzc3dkIHJvdDEzOnByc29wMnM4OHA=",
+// 	"UGFzc3dkIHJvdDEzOnA2bnNwM3AwNXA=",
+// 	"UGFzc3dkIHJvdDEzOjQ5cHA4b29zcnM="
+// ];
+
+$options = array(
+  'cluster' => 'ap1',
+  'useTLS' => true
+);
+
+$pushers = json_decode(file_get_contents("pusher-key.json"));
+$count = count($pushers);
+
+for ($i=0; $i < $count; $i++) { 
+
+	$data['message'] = '现在是： '.date("Y年m月d日 H:i:s").' flag2{'.$pushers[$i]->flag2.'} <br> <script>window.setTimeout(hello,2000); function hello(){window.location.href="/logout";}</script>';
+
+	$pusher = new Pusher\Pusher(
+		$pushers[$i]->key,
+		$pushers[$i]->secret,
+		$pushers[$i]->app_id,
+		$options
+	);
+	$pusher->trigger('user.1', 'my-event', $data);
+	echo "[".date("H:i:s")."] Pusher sent to admin ", $pushers[$i]->name, "\n";
+}
+
+ 
+
+
